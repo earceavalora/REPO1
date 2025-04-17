@@ -17,14 +17,15 @@ pipeline {
       }
     }
 
-    stage('Probar Autenticación') {
-      steps {
-        bat '''
-        echo Probando comando de escaneo solo para validar autenticación...
-        "%VERACODE_CLI_PATH%" help scan
-        '''
-      }
-    }
+stage('Escaneo estático Veracode') {
+  steps {
+    bat '''
+    echo Iniciando escaneo real con Veracode CLI...
+    "%VERACODE_CLI_PATH%" scan --type directory --source . --format table
+    '''
+  }
+}
+
   }
 }
 
