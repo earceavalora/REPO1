@@ -10,7 +10,7 @@ pipeline {
       steps {
         bat '''
         echo Verificando instalación oficial de Veracode CLI...
-        "%VERACODE_CLI_PATH%" --version
+        "%VERACODE_CLI_PATH%" version
         '''
       }
     }
