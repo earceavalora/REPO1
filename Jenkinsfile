@@ -2,24 +2,23 @@ pipeline {
   agent any
 
   environment {
-    VERACODE_CLI_VERSION = "2.16.0" // Puedes actualizar a la última si es necesario
+    VERACODE_CLI_VERSION = "2.16.0"
   }
 
   stages {
     stage('Preparación') {
       steps {
-        echo "Pipeline iniciado. Veracode CLI version definida: ${VERACODE_CLI_VERSION}"
+        echo "Pipeline iniciado en entorno Windows"
       }
     }
 
     stage('Descargar Veracode CLI') {
       steps {
-        sh '''
-          echo "Descargando Veracode CLI..."
-          curl -sSLO https://downloads.veracode.com/securityscan/veracode-cli/v${VERACODE_CLI_VERSION}/veracode-cli-Linux-x86_64.zip
-          unzip -o veracode-cli-Linux-x86_64.zip
-          chmod +x veracode
-          ./veracode --version
+        bat '''
+        echo Descargando Veracode CLI...
+        curl -sSLO https://downloads.veracode.com/securityscan/veracode-cli/v%VERACODE_CLI_VERSION%/veracode-cli-Windows-x86_64.zip
+        powershell -Command "Expand-Archive -Path 'veracode-cli-Windows-x86_64.zip' -DestinationPath . -Force"
+        veracode\\veracode.exe --version
         '''
       }
     }
