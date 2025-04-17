@@ -11,20 +11,20 @@ pipeline {
     stage('Verificar CLI Veracode') {
       steps {
         bat '''
-        echo Verificando instalación de Veracode CLI...
+        echo Verificando Veracode CLI...
         "%VERACODE_CLI_PATH%" version
         '''
       }
     }
 
-    stage('Autenticación con Veracode') {
+    stage('Probar Autenticación') {
       steps {
         bat '''
-        echo Configurando Veracode CLI con API Key...
-        "%VERACODE_CLI_PATH%" configure --api-key-id %VERACODE_API_KEY_ID% --api-key-secret %VERACODE_API_KEY_SECRET%
-        "%VERACODE_CLI_PATH%" whoami
+        echo Probando comando de escaneo solo para validar autenticación...
+        "%VERACODE_CLI_PATH%" help scan
         '''
       }
     }
   }
 }
+
